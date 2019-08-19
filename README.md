@@ -5,8 +5,8 @@ Slides and sample code for Time Series Data Analysis, Visualization and Forecast
 **Contents**
 
 - [Description](#description)
-- [[Slides](slides)
-+ [[Code](#code)
+- [Slides](slides)
++ [Code](#code)
 - [Data](#data)
 - [References](#references)
   - [Published References](#published-references)
