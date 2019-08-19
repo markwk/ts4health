@@ -68,11 +68,11 @@ Sample data is not being provided openly at this time. Please contact the author
 - [A comprehensive beginner’s guide to create a Time Series Forecast](https://www.analyticsvidhya.com/blog/2016/02/time-series-forecasting-codes-python/) - nice walkthrough of techniques for time series analysis and transformations
 - [ARIMA Model – Complete Guide to Time Series Forecasting in Python](https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/) - good example of ARIMA modeling with step-by-step code from analysis and parameter setting in model to forecasting and model accuracy metrics. 
 - [Time Series Analysis with Pandas](https://www.dataquest.io/blog/tutorial-time-series-analysis-with-pandas/) - uses Open Power Systems Data with some good examples
-- [Pandas Time Series][https://ourcodingclub.github.io/2019/01/07/pandas-time-series.html] - pandas example using sunspots data
+- [Pandas Time Series](https://ourcodingclub.github.io/2019/01/07/pandas-time-series.html) - pandas example using sunspots data
 - [Playing with time series data in python](https://towardsdatascience.com/playing-with-time-series-data-in-python-959e2485bff8) - focuses on energy trends data and more deep learning methods
 - [Working with Time Series from Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/03.11-working-with-time-series.html) 
 
 ### About Speaker
 
-TODO
+Mark Koester is a tech entrepreneur, writer, and technologist. His current work is at the intersection of data technologies AND human health and optimization. As a data scientist and web and mobile app developer, he is the creator of [PhotoStats.io](http://www.photostats.io/) (a photo tracking and analytics app), [PodcastTracker](http://www.podcasttracker.com) for podcast listening logging, [Biomarker Tracker](http://www.biomarkertracker.com/) (a health analytics service to better understand blood test results) and [QS Ledger](https://github.com/markwk/qs_ledger) (the most extensive, open source, personal data collection and analysis tool). Former Regional Lead in Greater China at Techstars, a seed-stage accelerator, and program coordinator at Startup Next (powered by Google for Entrepreneurs). He run a boutique dev shop [(Int3c.com](https://int3c.com)) and is an active open source contributor. He regularly writes at www.markwk.com.
 
