@@ -1,12 +1,14 @@
 # A Self Across Time: Time Series Data Analysis with Python
 
-Slides and sample code for Time Series Data Analysis, Visualization and Forecasting with Python for Health and Self
+Slides and sample code for Time Series Data Analysis, Visualization, Modeling and Forecasting with Python for Health and Self
+
+Talk provides code for time series analysis modeling in general and then applies it to quantified self and fitness tracking data from Fitbit, Apple Watch or Oura. 
 
 **Contents**
 
 - [Description](#description)
 - [Slides](slides)
-+ [Code](#code)
+- [Code](#code)
 - [Data](#data)
 - [References](#references)
   - [Published References](#published-references)
@@ -30,8 +32,8 @@ If we want to go beyond generic advice and personalize our medicine and healthy 
 
 ### [Slides](https://markwk.github.io/ts4health/slides/slides.html)
 
-- [View the most up-to-date slides here](https://markwk.github.io/ts4health/slides/slides.html) NOTE: Press "S" to view it in speaker mode to check out my talk notes and additional references. 
-- [Also available in markdown](https://github.com/markwk/ts4health/blob/master/slides/slides.md)
+- [View the most up-to-date slides here](https://markwk.github.io/ts4health/slides/slides.html). NOTE: Press "S" to view it in speaker mode and see additional talk notes and references. 
+- [View Slides text in markdown](https://github.com/markwk/ts4health/blob/master/slides/slides.md).
 
 ### [Code](https://github.com/markwk/ts4health/tree/master/code)
 
@@ -62,8 +64,15 @@ Sample data is not being provided openly at this time. Please contact the author
 
 #### Internet Resources
 
-- https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/
+- [Time Series Data Visualization with Python](https://machinelearningmastery.com/time-series-data-visualization-with-python/) - Code and example of data visualization for times series
+- [A comprehensive beginner’s guide to create a Time Series Forecast](https://www.analyticsvidhya.com/blog/2016/02/time-series-forecasting-codes-python/) - nice walkthrough of techniques for time series analysis and transformations
+- [ARIMA Model – Complete Guide to Time Series Forecasting in Python](https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/) - good example of ARIMA modeling with step-by-step code from analysis and parameter setting in model to forecasting and model accuracy metrics. 
+- [Time Series Analysis with Pandas](https://www.dataquest.io/blog/tutorial-time-series-analysis-with-pandas/) - uses Open Power Systems Data with some good examples
+- [Pandas Time Series][https://ourcodingclub.github.io/2019/01/07/pandas-time-series.html] - pandas example using sunspots data
+- [Playing with time series data in python](https://towardsdatascience.com/playing-with-time-series-data-in-python-959e2485bff8) - focuses on energy trends data and more deep learning methods
+- [Working with Time Series from Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/03.11-working-with-time-series.html) 
 
 ### About Speaker
 
 TODO
+

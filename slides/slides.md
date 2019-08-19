@@ -855,9 +855,20 @@ Why TS Matters, Next Steps and Future Research
 
 ----
 
-### Online Resources
+### Internet Resources 1
 
-- https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/
+- [Time Series Data Visualization with Python](https://machinelearningmastery.com/time-series-data-visualization-with-python/) - Code and example of data visualization for times series
+- [A comprehensive beginner’s guide to create a Time Series Forecast](https://www.analyticsvidhya.com/blog/2016/02/time-series-forecasting-codes-python/) - nice walkthrough of techniques for time series analysis and transformations
+- [ARIMA Model – Complete Guide to Time Series Forecasting in Python](https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/) - good example of ARIMA modeling with step-by-step code from analysis and parameter setting in model to forecasting and model accuracy metrics. 
+
+-----
+
+### Internet Resources 2
+
+- [Time Series Analysis with Pandas](https://www.dataquest.io/blog/tutorial-time-series-analysis-with-pandas/) - uses Open Power Systems Data with some good examples
+- [Pandas Time Series](https://ourcodingclub.github.io/2019/01/07/pandas-time-series.html) - pandas example using sunspots data
+- [Playing with time series data in python](https://towardsdatascience.com/playing-with-time-series-data-in-python-959e2485bff8) - focuses on energy trends data and more deep learning methods
+- [Working with Time Series from Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/03.11-working-with-time-series.html) 
 
 # APPENDIX
 
