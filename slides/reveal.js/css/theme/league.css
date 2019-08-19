@@ -277,6 +277,11 @@ body {
 @media print {
   .backgrounds {
     background-color: #2b2b2b; } }
+/* local
 body {
   background: url('../../../backgrounds/stars.gif');
+}*/
+/* remote */
+body {
+  background: url('https://media.giphy.com/media/UYBDCJjwOd9Re/giphy.gif');
 }

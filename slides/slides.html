@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Mark Koester">
+  <title>A Self Across Time</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reset.css">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style>
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="reveal.js/css/theme/league.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">A Self Across Time</h1>
+  <p class="author">Mark Koester</p>
+  <p class="date">PYCON MALAYSIA, August 24, 2019</p>
+</section>
+
+<section id="a-self-across-time-time-series-data-analysis-with-python" class="slide level2">
+<h2>A Self Across Time <br/> Time Series Data Analysis<br/> with Python</h2>
+<p>
+Mark Koester | www.markwk.com <br/> PYCON MALAYSIA, August 24, 2019<br/><br/> Slides and Code: github.com/markwk/ts4health
+</p>
+</section>
+<section id="slides-and-code" class="title-slide slide level1"><h1>Slides and Code:</h1><p>github.com/markwk/ts4health</p></section>
+<section><section id="key-terms" class="title-slide slide level1"><h1>Key Terms</h1></section><section class="slide level2">
+
+<h3 id="time-series">Time Series</h3>
+<blockquote>
+<p>A time series is a sequence of observations taken sequentially in time.</p>
+<p><small>George Box and Gwilym Jenkins, Time Series Analysis (2015, orig 1970)</small></p>
+</blockquote>
+<aside class="notes">
+<p>In short, a time series is a sequence of measurements or observations that varies in time. We define this in more detail but this is a good starting point and classic definition.</p>
+</aside>
+</section><section id="time-series-data-analysis" class="slide level2">
+<h2>Time Series Data Analysis</h2>
+<blockquote>
+<p>The objective of time series analysis is to decompose a time series into its constituent characteristics and develop a mathematical model for each.</p>
+<p><small>Pal, D. A., &amp; Prakash, D. P. K. S. (2017). <em>Practical Time Series Analysis</em></small></p>
+</blockquote>
+<aside class="notes">
+<p>Time Series Analysis describes various techniques used to prepare, process, explore and often visualize time-oriented data. TS strives to extract meaningful statistics and other characteristics of the data. Time series analysis aims to understand and classify the inherent nature of a (time) series and eventually try to formulate a model for the series.</p>
+</aside>
+</section><section id="examples-of-time-series-analysis" class="slide level2">
+<h2>Examples of Time Series Analysis</h2>
+<ul>
+<li><strong>Financial markets</strong>: stock prices and daily closing value of the Dow Jones Industrial Average.</li>
+<li><strong>Natural Phenomenon</strong>: temperature trends, climate change, ocean tides, sunspots.</li>
+<li><strong>Economics and Price fluctations</strong>: GDP, Job Market, supply and demand, i.e. buying and selling drugs.</li>
+<li><strong>Health, Psychology and Behavioral Sciences</strong>: Drug or intervention analysis, investigation of natural, biological cycles</li>
+</ul>
+</section><section class="slide level2">
+
+<h3 id="example-time-series-with-forecast-function">Example Time Series with Forecast Function</h3>
+<p><img data-src="images/201908141034.32.png" style="width:60.0%" /></p>
+<p><small>Source: Box, 2015.</small></p>
+</section><section id="time-series-data-analysis-for-health-and-self" class="slide level2">
+<h2>Time Series Data Analysis <br />for Health and Self</h2>
+<ul>
+<li class="fragment">Health: <u>N-of-1 trials</u> in Medical Research and Practice, esp intervention studies.</li>
+<li class="fragment">Self: <u>Within-individual variability</u> for Self-Trackers, Quantified Self and Biohackers.</li>
+</ul>
+<aside class="notes">
+<p>Less work has been done and fewer examples are available about time series analysis in the realm of health and wellness.</p>
+<p>Most of the related discussions on this are from medical research using what are called n=1 or n-of-1 trials. N-of-1 trials are studies involving a single patient. More on n-of-1 trials will be explored at the end of the talk.</p>
+<p>With the rise of quantified self and various self-tracking technologies, we see similar interest in trying to understand and model within-individual (or intra-individual) variations using time series data. This might be personal data like fitness, mood, energy level, biomarker data like blood tests or even productivity and creativity.</p>
+</aside>
+</section><section id="our-question" class="slide level2">
+<h2>Our Question:</h2>
+<p>How to understand human health across time <br /> or an individual self over a lifetime?</p>
+<aside class="notes">
+<p>While the gold standard of health research are randomized clinical trials, increasingly as we move towards individualized health and personalized medicine the question becomes not just about how to understand health as such but <strong>how to understand the health of a single case, a single person</strong>. For this, among other things (like biological variation), we have to look at the role of <strong>time</strong>. We need time series data analysis to make our personal data useful and usable or analysis.</p>
+<p>Health Examples: - Global Health trends - Individual health changes in a lifetime</p>
+</aside>
+</section></section>
+<section><section id="who-am-i" class="title-slide slide level1"><h1>Who Am I?</h1></section><section class="slide level2">
+
+<h3 id="who-am-i-1">Who Am I?</h3>
+<!--[[201907301131_about_me_markwk]]-->
+<ul>
+<li class="fragment">deeply interesting in how both humans and technologies work</li>
+<li class="fragment">part social scientist, part technologist</li>
+<li class="fragment">software developer / builder: Int3c.com, github.com/markwk</li>
+<li class="fragment">writer / thinker: www.markwk.com, DataDrivenYou.com</li>
+</ul>
+<aside class="notes">
+<p>My name is Mark Koester. I describe myself as part social scientist, part technologist. I’m deeply interesting in how both humans and technologies work.</p>
+<p>Professionally, I’m a software developer and writer. I run a web, app and data development company.</p>
+<p>I also write and build stuff too… including apps, websites, open source data products and more, which I can share briefly more about at the end.</p>
+<p>In the past, I have also run various innovation, entrepreneurship and startup programs, like accelerators, workshops, startup weekends, etc. n particular during my time at Techstars and with a few other organizations around the world.</p>
+</aside>
+</section><section id="my-mission" class="slide level2">
+<h2>My Mission</h2>
+<p><strong>to transform science and data into better self-understanding and empowered self-improvement</strong></p>
+</section><section id="current-work" class="slide level2">
+<h2>Current Work</h2>
+<p>Intersection of data technologies AND human health and optimization</p>
+<ul>
+<li class="fragment">Doctors and companies to improve health and happiness</li>
+<li class="fragment">Quantified Self and Biohackers</li>
+<li class="fragment">Build data-driven tools with Machine Learning and AI (QS Ledger, PhotoStats.io)</li>
+</ul>
+<aside class="notes">
+<p>My main focus nowadays is at the intersection of data technologies AND human health and optimization. For example, among other things, I worked with doctors and companies on how to use wearable and biomarker data to improve employee health and happiness; I’ve created an open source platform for personal data aggregation and visualization (QS Ledger); and I’ve built apps using machine learning and AI (like PhotoStats.io and Datadrivenyou.com). I also write a lot on this topics too on my blog www.markwk.com, and I’m currently working on an online course and a book.</p>
+</aside>
+</section></section>
+<section><section id="a-self-across-time" class="title-slide slide level1"><h1>A Self Across Time</h1><p>Time Series Data Analysis <br /> with Python</p></section><section id="talk-outline" class="slide level2">
+<h2>Talk Outline</h2>
+<ul>
+<li>Time and Temporal Structures of Time Series Data</li>
+<li>Our Sample Dataset (Sleep and Exercise / Activity) and Practical Questions</li>
+<li>Time Series Visualization, EDA, and Processing</li>
+<li>Tests and Techniques for Time Series Data</li>
+<li>Modeling Time Series Data</li>
+<li>Time Series Data Analysis <em>Applied</em> to Health and Self</li>
+<li>Conclusions, Next Steps and Future Directions</li>
+</ul>
+<p><small>REFERENCES and APPENDIX</small></p>
+</section><section class="slide level2">
+
+<h3 id="talk-note">Talk Note</h3>
+<p>Focus will be on univariate, linear, discrete time series</p>
+<p><small>(instead of multivariate, nonlinear, or continuous)</small></p>
+<p><small>and assume our data/process follows a stochastic model.</small></p>
+</section></section>
+<section><section id="time-series-data-and-temporal-structures" class="title-slide slide level1"><h1>Time Series Data <br/>and Temporal Structures</h1></section><section class="slide level2">
+
+<h3 id="what-is-time">What is Time?</h3>
+<blockquote>
+<p>What, then, is time? If no one asks me, I know what it is. If I wish to explain it to him who asks, I do not know.</p>
+<p><small>Saint Augustine (AD 354-430, The Confessions)</small></p>
+</blockquote>
+<aside class="notes">
+<p>Time has a pecular quality such that we think we intuitive know and understand it. But once we are asked, as Saint Augustine asked 1600 years ago, it seems rather hard to explain what we mean. In fact, some of the difficulty with defining time comes with the different perspectives we might take on the question itself. The nature of time has been a long-standing question for humans throughout history. Various philosophers, thinkers, scientists, physists and artists have all weighed in, often using their conceptual domain as the starting point.</p>
+<p>Interestingly, while we often think of time as an innate and universal concept, when you look at history, literature and religion, you notice that our modern sense of time is a rather modern one. In fact, many earlier cultures like the Mayans did not view time as linear, as we now do, but viewed it as cyclical. According to Whitrow in various books on time, key scientific figures like Kant and Descare led to the origin of the idea of time as we know it now. Ref: [[201907081519]]</p>
+<p>History and Evolution of Measuring Time………………[[201904131528]]</p>
+<p>Much of philosophy and the history of philosophy can be thought of in terms questions regarding what is timeless and what is not. Metaphysics would be the central domain in which these questions arised, but in fact, question of what is timeless seeps into nearly all thinkers. Plato, for example, looked to the realm of the Forms to define many of his fundamental concepts. Numerous other philosophers, like Kant, depended on a timeless, immortal realm used to define ethics and reason. Hegal may have added a dynamic quality but the dialetical process transpired largely in the timeless realm of thought and outside of the empirical. Even the question of time ironically becomes whether it’s an entity and debated on the terms of metaphysics, including whether it’s real or not or just a psychological phenomenon. In short, the timeless haunts even the timed. ref: [[201908041458_timeless_things_philosophy]]</p>
+</aside>
+</section><section class="slide level2">
+
+<h3 id="two-primary-characteristics-of-time">Two Primary Characteristics of Time:</h3>
+<ul>
+<li class="fragment">time is unidirectional (arrow of time goes forward)</li>
+<li class="fragment">time gives order to events</li>
+</ul>
+<aside class="notes">
+<p>Interestingly, while we often think of time as an innate and universal concept, when you look at history, literature and religion, you notice that our modern sense of time is a rather modern one. In fact, many earlier cultures like the Mayans did not view time as linear, as we now do, but viewed it as cyclical. According to Whitrow in various books on time, key scientific figures like Kant and Descare led to the origin of the idea of time as we know it now.</p>
+<p>Regardless of the philosophical quandries and the historical conceptions, two defining features of time stand out: 1. time is unidirectional (arrow of time goes forward) and 2. time gives order to events (Aigner, 2011). In short, “the fundamental experience of time for people seems to be events that happen one after the other” (Frank, 1998) and we often use metaphors like a river or journey to reflect this conceptualization [[201904092126_metaphor]].</p>
+</aside>
+</section><section class="slide level2">
+
+<h3 id="general-challenges-of-modeling-time">General Challenges of Modeling Time</h3>
+<ul>
+<li class="fragment">Physics of Time</li>
+<li class="fragment">Our Experience, Conception and Consciousness of Time</li>
+<li class="fragment">How do we link “models of time to people’s basic experiences”? (Frank, 1998).</li>
+</ul>
+<aside class="notes">
+<p>Modeling and visualizing time and the time domain presents a number of considerations, including those of actual experience, design, metaphors, and how we link “models of time to people’s basic experiences” (Frank, 1998).</p>
+<p>[[201907091310_modeling_time_domain]]</p>
+</aside>
+</section><section class="slide level2">
+
+<h3 id="good-news">Good News…</h3>
+<ul>
+<li class="fragment">Fortunately, we don’t need to deal with these general time problems as such, because…</li>
+<li class="fragment">…we only need to deal with the <u>time challenges in our data</u>!</li>
+</ul>
+</section><section class="slide level2">
+
+<h3 id="data-science-challenges-with-time-series">Data Science Challenges with Time Series:</h3>
+<ul>
+<li class="fragment">How to understand the time component in a data set?</li>
+<li class="fragment">How to isolate out time…</li>
+<li class="fragment">…so we can stationalize…</li>
+<li class="fragment">…model and forecast the data?</li>
+</ul>
+<aside class="notes">
+<p>Time series analysis is generally considered an advanced topic for machine learning and deep learning.</p>
+<p>What are the Data Science Challenges with Time Series?</p>
+<p>Because trends and seasonality in time results in non-stationary data, we cannot leverage typical statistical methods. So in order to understand events that happen over time or model and forecast time series phenonomon we first need to deal with time or time index.</p>
+</aside>
+</section></section>
+<section><section id="time-index" class="title-slide slide level1"><h1>Time Index</h1></section><section id="time-series-general-definition" class="slide level3">
+<h3>Time Series (general definition)</h3>
+<ul>
+<li class="fragment">A time series is a <u>sequence</u> of measurements or observations that <u>varies in time</u>.</li>
+</ul>
+<aside class="notes">
+<p>Time-oriented or time-series data is data that is somehow connected to time and have a <strong>natural temporal ordering</strong> (in contrast to Cross-Sectional Data). Time series data is a collected sequence of observations, often recorded at regular intervals.</p>
+</aside>
+</section><section class="slide level2">
+
+<h3 id="time-index-1">Time Index</h3>
+<p>Part of what happens in your data is because of the effects of time, time’s order, cycles, patterns, etc.</p>
+<aside class="notes">
+<p>Confusion and challenge with thinking about time series data is that we need to first think about the <strong>time index</strong>. The time index is just a generic way of thinking that part of what happens in your data is because of the effects of time, time’s order, cycles, patterns, etc.</p>
+<p>What we are trying to do is isolate out the various aspect of the time index.</p>
+</aside>
+</section><section class="slide level2">
+
+<h3 id="time-index-can-create-non-stationary-data">Time (Index) Can Create Non-Stationary Data</h3>
+<p>Examples of Stationary vs. Non-Stationary</p>
+</section><section class="slide level2">
+
+<p><img data-src="images/201908161341.22.png" /></p>
+<p><small><a href="https://www.analyticsvidhya.com/blog/2015/12/complete-tutorial-time-series-modeling/">Source: Analytics Vidhya</a></small></p>
+</section><section class="slide level2">
+
+<p><img data-src="images/201908161341.18.png" /></p>
+<p><small><a href="https://www.analyticsvidhya.com/blog/2015/12/complete-tutorial-time-series-modeling/">Source: Analytics Vidhya</a></small></p>
+</section><section class="slide level2">
+
+<p><img data-src="images/201908161341.27.png" /></p>
+<p><small><a href="https://www.analyticsvidhya.com/blog/2015/12/complete-tutorial-time-series-modeling/">Source: Analytics Vidhya</a></small></p>
+</section><section class="slide level2">
+
+<h3 id="internal-structures-of-temporal-data">Internal Structures of Temporal Data</h3>
+<p>(aka effects of the time index)</p>
+<ul>
+<li><u>trend</u> (general direction of data)</li>
+<li><u>seasonality</u> (weekly, monthly, seasons, etc.)</li>
+<li><u>cyclical movements</u> (seasonality on a longer scale, often non-calendar)</li>
+<li><u>serial correlation</u> (lag, meaning previous observation(s) affect current one)</li>
+<li><u>unexpected variations</u> (noise, randomness)</li>
+</ul>
+<aside class="notes">
+<p>Time Series Data has several interesting internal structure that require special techniques (and often mathematical treatment) for its analysis. These internal structures include…</p>
+<p>Most time series data displays one or several of these structures.</p>
+</aside>
+</section><section id="stationarity" class="slide level2">
+<h2>Stationarity</h2>
+<p>(or stationary time series or stationary process)</p>
+<ul>
+<li>Stationarity means that the statistical properties of the process do not change over time</li>
+</ul>
+<aside class="notes">
+
+</aside>
+</section><section id="stationarizing-our-ts-data" class="slide level2">
+<h2>Stationarizing Our TS Data</h2>
+<p>Generating stationary data is important in order to understand, model, and forecast time series data.</p>
+<aside class="notes">
+<p>Generating stationary data is important because by taking out trends, seasonal and cyclical components, we’d only be left with irregular fluctations which cannot be modeling using just the time series as an explanatory variabe. So when we do forecasting the irregularity is assumed to be <strong>independent and identically distributed (iid)</strong> observations and modeled by linear regression on the variables other than the time index - autocorrelation - stationarity (or need to convert non-stationary data to stationary)</p>
+</aside>
+</section></section>
+<section><section id="approaches" class="title-slide slide level1"><h1>Approaches</h1><p>to Time Series Data</p></section><section id="box-jenkins-method" class="slide level4">
+<h4>Box-Jenkins Method</h4>
+<p><img data-src="images/201908141046.26.png" style="width:50.0%" /></p>
+</section><section class="slide level2">
+
+<h4 id="a-generic-methodology-of-time-series-analysis">A generic methodology of time series analysis</h4>
+<p><img data-src="images/201908051547.37.png" style="width:45.0%" /></p>
+<p><small>Source: Pal, 2017.</small></p>
+</section></section>
+<section><section id="our-sample-dataset-and-questions" class="title-slide slide level1"><h1>Our Sample Dataset and Questions</h1></section><section id="our-sample-set" class="slide level3">
+<h3>Our Sample Set</h3>
+<ul>
+<li>Wearable Devices and individuals: Fitbit (2), Oura (1), Apple Watch (1)</li>
+<li>Target Data:
+<ul>
+<li>Sleep</li>
+<li>Exercise / Activity Level, inc Steps</li>
+</ul></li>
+</ul>
+</section><section class="slide level2">
+
+<p>Our Focus: <strong>Within-Individual Variablity</strong></p>
+<aside class="notes">
+<p>While obviously a larger data set would be better, since our goal was to understand <strong>within-individual variablity</strong>, a sample set of a few individuals was enough for our current investigative purposes.</p>
+</aside>
+</section><section class="slide level2">
+
+<h3 id="practical-questions">Practical Questions</h3>
+<ul>
+<li>Are there and what are the time patterns for sleep and activity levels?</li>
+<li>Can we model and forecast based on these variables?</li>
+<li>Does sleep correlate or affect activity level? Or vis-versa?</li>
+</ul>
+</section><section class="slide level2">
+
+<h3 id="data-collection-and-processing">Data Collection and Processing</h3>
+<ul>
+<li>Data collection was done using a variation of <a href="https://github.com/markwk/qs_ledger">QS Ledger</a>, an open source Python project for collecting and visualization of self-tracking data (Fitbit, Apple Health, Oura, etc).</li>
+<li>Each data set was then processed and aggregated into a standardized format.</li>
+</ul>
+<p><small>SEE: Previous Speech <a href="https://github.com/markwk/python4selftrackers">Python For Self-Trackers</a>.</small></p>
+</section><section class="slide level2">
+
+<h3 id="example-raw-dataset">Example Raw Dataset</h3>
+<p><img data-src="images/201908141110.26.png" style="width:75.0%" /></p>
+<p><small>Source: Fitbit User 1</small></p>
+</section><section class="slide level2">
+
+<h3 id="example-data-set-with-simple-moving-averages">Example Data Set with Simple Moving Averages</h3>
+<p><img data-src="images/201908141116.09.png" style="width:75.0%" /></p>
+<p><small>Source: Fitbit User 2</small></p>
+</section><section class="slide level2">
+
+<h3 id="dataset-general-characteristics">Dataset General Characteristics</h3>
+<aside class="notes">
+<p>Description of dataset here.</p>
+</aside>
+</section></section>
+<section><section id="time-series-visualization" class="title-slide slide level1"><h1>Time Series Visualization</h1><p>Exploratory Data Analysis</p>
+<p>TS Data Processing</p></section><section class="slide level2">
+
+<p>Why do we use data visualization for initial time series analysis?</p>
+<ul>
+<li class="fragment">check for trends, seasonality and cyclic patterns</li>
+</ul>
+</section><section class="slide level2">
+
+<h3 id="examples-of-time-series-visualization">Examples of Time Series Visualization</h3>
+<ul>
+<li>Line Charts</li>
+<li>Histogram and Density Plots</li>
+<li>Box and Whisker Plots by Interval</li>
+<li>Heat Maps</li>
+<li>Time Series Lag Scatter Plots</li>
+</ul>
+</section><section class="slide level2">
+
+<h3 id="additional-methods-of-exploratory-data-analysis">Additional Methods of Exploratory Data Analysis</h3>
+<ul>
+<li>Check for lag effects and scatterplot</li>
+<li>Moving Averages (i.e. rolling mean)</li>
+<li>Exponentially-weighted moving average (EWMA)</li>
+</ul>
+</section><section class="slide level2">
+
+<h3 id="missing-data">Missing Data?</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># assume zero is nan</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>series.replace(<span class="dv">0</span>, np.nan, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>series.isna().<span class="bu">sum</span>()</span></code></pre></div>
+</section><section class="slide level2">
+
+<h3 id="missing-data-imputation">Missing Data: Imputation</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># fill in missing values if we can</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="cf">if</span> series.isna().<span class="bu">sum</span>() <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    series <span class="op">=</span> series.interpolate(method<span class="op">=</span><span class="st">&#39;time&#39;</span>) <span class="co"># time or linear</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># drops any we can&#39;t fill-in like at start of time series</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="cf">if</span> series.isna().<span class="bu">sum</span>() <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    series.dropna(inplace<span class="op">=</span><span class="va">True</span>)    </span></code></pre></div>
+</section><section class="slide level2">
+
+<h3 id="z-scores-standard-score">Z-Scores (standard score)</h3>
+<ul>
+<li>Easy to calculate</li>
+<li>Good way to compare between measurements and between individuals when scales may vary (like mood, activity, steps, sleep, etc.)</li>
+</ul>
+<aside class="notes">
+<p>In statistics the standard score or z-score is a way of translating raw scores and observations into its relationship with the mean. Put more technically, it’s a fractional number according to which the number is above or below the mean. Numbers above are positive, while those below are negative.</p>
+<p>The z-score is often used in the z-test in standardized testing as a way to express something like your percentile rank.</p>
+<p>Overall, z-scores are a kind of normalization.</p>
+</aside>
+</section><section class="slide level2">
+
+<h3 id="z-scores-comparing-individuals">Z-Scores: Comparing Individuals</h3>
+<p>:<img data-src="images/201908161422.55.png" /></p>
+</section><section class="slide level2">
+
+<h3 id="z-scores-comparing-two-metrics">Z-Scores: Comparing Two Metrics</h3>
+<p><img data-src="images/201908161420.58.png" style="width:70.0%" /></p>
+</section><section class="slide level2">
+
+<h3 id="z-scores-outlier-detection">Z-Scores: Outlier Detection</h3>
+</section></section>
+<section><section id="statistical-tests" class="title-slide slide level1"><h1>Statistical Tests</h1><p>for Detecting Temporal Effects</p></section><section id="statistical-tests-1" class="slide level2">
+<h2>Statistical Tests</h2>
+<ul>
+<li>are used check for autocorrelation and if there are other time index effects.</li>
+<li>Examples: Autocorrelation Function (ACF), Partial Autocorrelation Function (PACF), Dickey-Fuller Test</li>
+</ul>
+</section><section class="slide level2">
+
+<h3 id="autocorrelation-function-acf">Autocorrelation Function (ACF)</h3>
+<ul>
+<li>ACF tells you the correlation between points separated by various time lags.</li>
+</ul>
+<p><br /></p>
+<p><small>NOTE: The prefix “auto” refers to “self” (rather than automatic)</small></p>
+<aside class="notes">
+<p>Time-series data is ordered, meaning there is information in your sample data where you can look for useful temporal patterns. The autocorrelation function (ACF) is one tool used to find those temporal patterns in data. Specifically, ACF tells you the correlation between points separated by various time lags.</p>
+<p>Based on how many time steps they are separated by, the ACF plot displays how correlated those datapoints are. So, at zero point the correlation is 100%. A value of zero indicates no correlation.</p>
+</aside>
+</section><section class="slide level2">
+
+<h5 id="four-sample-scenarios">Four Sample Scenarios</h5>
+<p><img data-src="images/201908181121.46.png" style="width:70.0%" /></p>
+</section><section class="slide level2">
+
+<h3 id="autocorrelation-plots-classic-pattern">Autocorrelation Plots (Classic Pattern)</h3>
+<p><img data-src="images/201908161417.44.png" /></p>
+</section><section class="slide level2">
+
+<h3 id="autocorrelation-plots-health-example">Autocorrelation Plots (Health Example)</h3>
+<p><img data-src="images/201908161415.53.png" /></p>
+</section><section class="slide level2">
+
+<h3 id="partial-autocorrelation-function-pacf">Partial Autocorrelation Function (PACF)</h3>
+<ul>
+<li>shows youu the relationship between an observation in a time series with observations at prior time steps but, unlike ACF, with the relationships of intervening observations removed.</li>
+</ul>
+</section><section class="slide level2">
+
+<h3 id="code-examples">CODE EXAMPLES:</h3>
+<p>Data_Visualization_Health_and_Self_Time_Series.ipynb</p>
+<p><small>For background see, Time_Series_Data_Visualization_with_Python.ipynb</small></p>
+</section><section id="code-autocorrelation" class="slide level2">
+<h2>Code: Autocorrelation</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">from</span> statsmodels.graphics.tsaplots <span class="im">import</span> plot_acf, plot_pacf</span>
+<span id="cb3-2"><a href="#cb3-2"></a>plot_acf(test_ts)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co"># plot_pacf(test_ts)</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>plt.show()</span></code></pre></div>
+</section><section class="slide level2">
+
+<p><img data-src="images/201908171838.26.png" /></p>
+</section><section id="automated-dickey-fuller-test" class="slide level2">
+<h2>Automated Dickey-Fuller Test</h2>
+<ul>
+<li class="fragment">The Augmented Dickey-Fuller is a test used to check a univariate process or dataset for the presence of serial correlation.</li>
+<li class="fragment">The test statistic is expected to be negative. So if it is less than or more negative than the critical value we can conclude that the data is stationary.</li>
+</ul>
+</section><section class="slide level2">
+
+<h3 id="code-automated-dickey-fuller-test">Code: Automated Dickey-Fuller Test</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">from</span> statsmodels.tsa.stattools <span class="im">import</span> adfuller</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#Perform Dickey-Fuller test:</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="bu">print</span>(<span class="st">&#39;Results of Dickey-Fuller Test:&#39;</span>)</span>
+<span id="cb4-4"><a href="#cb4-4"></a>dftest <span class="op">=</span> adfuller(timeseries, autolag<span class="op">=</span><span class="st">&#39;AIC&#39;</span>)</span>
+<span id="cb4-5"><a href="#cb4-5"></a>dfoutput <span class="op">=</span> pd.Series(dftest[<span class="dv">0</span>:<span class="dv">4</span>], index<span class="op">=</span>[<span class="st">&#39;Test Statistic&#39;</span>,<span class="st">&#39;p-value&#39;</span>,<span class="st">&#39;#Lags Used&#39;</span>,<span class="st">&#39;Number of Observations Used&#39;</span>])</span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="cf">for</span> key,value <span class="kw">in</span> dftest[<span class="dv">4</span>].items():</span>
+<span id="cb4-7"><a href="#cb4-7"></a>    dfoutput[<span class="st">&#39;Critical Value (</span><span class="sc">%s</span><span class="st">)&#39;</span><span class="op">%</span>key] <span class="op">=</span> value</span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="bu">print</span>(dfoutput)</span></code></pre></div>
+</section><section class="slide level2">
+
+<h3 id="sample-scenario">Sample Scenario:</h3>
+<p><img data-src="images/201908171847.49.png" /></p>
+</section><section class="slide level2">
+
+<h3 id="results-of-dickey-fuller-test">Results of Dickey-Fuller Test:</h3>
+<pre><code>Test Statistic                   0.815369
+p-value                          0.991880
+#Lags Used                      13.000000
+Number of Observations Used    130.000000
+Critical Value (1%)             -3.481682
+Critical Value (5%)             -2.884042
+Critical Value (10%)            -2.578770</code></pre>
+<p><br /></p>
+<p><em>What Does this Mean?</em> This data is not stationary!</p>
+</section></section>
+<section><section id="is-our-health-data-stationary" class="title-slide slide level1"><h1>Is Our Health Data Stationary?</h1></section><section class="slide level2">
+
+<h3 id="autocorrelation">Autocorrelation</h3>
+<p><img data-src="images/201908171901.07.png" /></p>
+<p><small>Apple Watch 01 Sleep</small></p>
+</section><section class="slide level2">
+
+<h3 id="autocorrelation-1">Autocorrelation</h3>
+<p><img data-src="images/201908171851.09.png" /></p>
+<p><small>fitbit_02 Sleep</small></p>
+</section><section class="slide level2">
+
+<h3 id="partial-autocorrelation">Partial Autocorrelation</h3>
+<p><img data-src="images/201908171851.13.png" /></p>
+<p><small>fitbit_02 Sleep</small></p>
+</section><section class="slide level2">
+
+<h3 id="results-of-dickey-fuller-test-1">Results of Dickey-Fuller Test:</h3>
+<pre><code>Test Statistic                  -4.625906
+p-value                          0.000116
+#Lags Used                       6.000000
+Number of Observations Used    357.000000
+Critical Value (1%)             -3.448801
+Critical Value (5%)             -2.869670
+Critical Value (10%)            -2.571101</code></pre>
+<p><small>fitbit_02 steps without outlier tweaking</small></p>
+</section><section class="slide level2">
+
+<h3 id="results-of-dickey-fuller-test-2">Results of Dickey-Fuller Test:</h3>
+<pre><code>Test Statistic                -7.57
+p-value                        2.70
+#Lags Used                     2.00
+Number of Observations Used    3.61
+Critical Value (1%)           -3.44
+Critical Value (5%)           -2.86
+Critical Value (10%)          -2.57</code></pre>
+<p><small>fitbit_02 steps with outlier tweaking</small></p>
+</section><section class="slide level2">
+
+<h3 id="steps">Steps</h3>
+<pre><code>apple_watch_01: 
+Without Averaging Out Outliers: -1.23
+With Averaging Out Outliers: -7.22
+
+fitbit_01: 
+Without Averaging Out Outliers: -3.329097
+With Averaging Out Outliers: -5.436158
+
+fitbit_02: 
+Without Averaging Out Outliers: -4.62
+With Averaging Out Outliers: -7.57</code></pre>
+</section><section class="slide level2">
+
+<h3 id="sleep">Sleep</h3>
+<pre><code>apple_watch_01: 
+Without Averaging Out Outliers: -1.557651e+01
+With Averaging Out Outliers: -19.654423
+
+fitbit_01: 
+Without Averaging Out Outliers: -5.407617
+With Averaging Out Outliers:  -4.959970
+
+fitbit_02: 
+Without Averaging Out Outliers: -1.097
+With Averaging Out Outliers: -4.925933 </code></pre>
+</section><section id="what-does-this-mean" class="slide level2">
+<h2>What Does this Mean?</h2>
+<p>Our health data is <em>generally</em> stationary.</p>
+<ul>
+<li class="fragment">Individual differences exist, meaning some people’s sleep or exercise numbers display more temporal patterns, like a lag effect with sleep or exercise.</li>
+<li class="fragment">Outliers can result in our data appearing more non-stationary.</li>
+<li class="fragment">By removing or averaging out outliers, we can make our data <em>more</em> stationary</li>
+</ul>
+</section></section>
+<section><section id="techniques" class="title-slide slide level1"><h1>Techniques</h1><p>for Dealing with Time Series Data</p>
+<aside class="notes">
+<p>There are several methods for transforming non-stationary ts into stationary data.</p>
+</aside></section><section id="stationary-ts-techniques" class="slide level2">
+<h2>Stationary TS Techniques</h2>
+<ul>
+<li>Smoothing: Moving average</li>
+<li>Exponentially Weighted Moving Average</li>
+<li>Differencing</li>
+<li>Decomposition</li>
+</ul>
+</section><section id="ts-techniques-code" class="slide level2">
+<h2>TS Techniques Code:</h2>
+<p>Tests_and_Techniques_Health_and_Self_Time_Series.ipynb</p>
+</section></section>
+<section><section id="modeling-forecasting" class="title-slide slide level1"><h1>Modeling &amp; Forecasting</h1><p>for Time Series Data</p></section><section id="box-jenkins-model" class="slide level2">
+<h2>Box-Jenkins Model</h2>
+<p>ARIMA = Auto-Regressive Integrated Moving Average</p>
+</section><section id="arima" class="slide level2">
+<h2>ARIMA</h2>
+<ul>
+<li><strong>AR</strong> for Autoregression: A model that uses the dependent relationship between an observation and some number of lagged observations.</li>
+<li><strong>I</strong> for Integrated: A preprocessing procedure to “stationarize” time series if needed, for example using differencing of raw observations</li>
+<li><strong>MA</strong> for Moving Average: A model that uses the dependency between an observation and a residual error from a moving average model applied to lagged observations.</li>
+</ul>
+<aside class="notes">
+<p>AR and MA are two widely used linear models that work on stationary time series.</p>
+</aside>
+</section><section class="slide level2">
+
+<h3 id="parameters-in-an-arima-model">Parameters in an ARIMA Model:</h3>
+<p>Standard notation: <strong>ARIMA(p, d, q)</strong></p>
+<ul>
+<li class="fragment"><strong>p</strong> The number of lag observations included in the model, also called the lag order.</li>
+<li class="fragment"><strong>d</strong> The number of times that the raw observations are differenced, also called the degree of differencing.</li>
+<li class="fragment"><strong>q</strong> The size of the moving average window, also called the order of moving average.</li>
+</ul>
+<aside class="notes">
+<p>Parameters are substituted with integer values to indicate the specific ARIMA model being used.</p>
+</aside>
+</section><section class="slide level2">
+
+<h3 id="common-arima-models">Common ARIMA Models</h3>
+<p><img data-src="images/201908121352.16.png" style="width:50.0%" /></p>
+</section><section id="ts-modeling-code" class="slide level2">
+<h2>TS Modeling Code:</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="im">from</span> statsmodels.tsa.arima_model <span class="im">import</span> ARIMA</span>
+<span id="cb10-2"><a href="#cb10-2"></a>model <span class="op">=</span> ARIMA(ts_log, order<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="co"># set parameters here</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>results_AR <span class="op">=</span> model.fit(disp<span class="op">=-</span><span class="dv">1</span>)  </span>
+<span id="cb10-4"><a href="#cb10-4"></a>plt.plot(ts_log_diff)</span>
+<span id="cb10-5"><a href="#cb10-5"></a>plt.plot(results_AR.fittedvalues, color<span class="op">=</span><span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+<p><small>TS_Statistical_Modeling_Health_and_Self_Time_Series.ipynb</small></p>
+</section><section class="slide level2">
+
+<p><img data-src="images/201908181134.39.png" /></p>
+</section><section class="slide level2">
+
+<p><img data-src="images/201908181134.49.png" /></p>
+</section><section class="slide level2">
+
+<h3 id="auto-arima-model-selection-and-forecast">“Auto” Arima Model Selection and Forecast</h3>
+<ul>
+<li>Pmdarima operates by wrapping statsmodels.tsa.ARIMA and statsmodels.tsa.statespace.SARIMAX into one estimator class and creating a more user-friendly estimator interface for programmers familiar with scikit-learn.</li>
+</ul>
+<p>Ref: https://pypi.org/project/pmdarima/</p>
+</section><section class="slide level2">
+
+<h3 id="auto_arima-example">Auto_Arima Example:</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>model <span class="op">=</span> pm.auto_arima(train, start_p<span class="op">=</span><span class="dv">1</span>, start_q<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb11-2"><a href="#cb11-2"></a>                      test<span class="op">=</span><span class="st">&#39;adf&#39;</span>,       <span class="co"># use adftest to find optimal &#39;d&#39;</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>                      max_p<span class="op">=</span><span class="dv">3</span>, max_q<span class="op">=</span><span class="dv">3</span>, <span class="co"># maximum p and q</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>                      m<span class="op">=</span><span class="dv">1</span>,              <span class="co"># frequency of series</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>                      d<span class="op">=</span><span class="va">None</span>,           <span class="co"># let model determine &#39;d&#39;</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>                      seasonal<span class="op">=</span><span class="va">False</span>,   <span class="co"># No Seasonality</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>                      start_P<span class="op">=</span><span class="dv">0</span>, </span>
+<span id="cb11-8"><a href="#cb11-8"></a>                      D<span class="op">=</span><span class="dv">0</span>, </span>
+<span id="cb11-9"><a href="#cb11-9"></a>                      trace<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb11-10"><a href="#cb11-10"></a>                      error_action<span class="op">=</span><span class="st">&#39;ignore&#39;</span>,  </span>
+<span id="cb11-11"><a href="#cb11-11"></a>                      suppress_warnings<span class="op">=</span><span class="va">True</span>, </span>
+<span id="cb11-12"><a href="#cb11-12"></a>                      stepwise<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-13"><a href="#cb11-13"></a></span>
+<span id="cb11-14"><a href="#cb11-14"></a><span class="bu">print</span>(model.summary())</span></code></pre></div>
+</section><section class="slide level2">
+
+<h3 id="auto_arima-example-results">Auto_Arima Example Results:</h3>
+<p><img data-src="images/201908181140.18.png" style="width:60.0%" /></p>
+</section></section>
+<section id="time-series-data-analysis-1" class="title-slide slide level1"><h1>Time Series </br /> Data Analysis</h1><p>Applied to Health and Self</p></section>
+<section><section id="conclusions" class="title-slide slide level1"><h1>Conclusions</h1><p>Why TS Matters, Next Steps and Future Research</p></section><section class="slide level2">
+
+</section><section class="slide level2">
+
+</section></section>
+<section><section id="references" class="title-slide slide level1"><h1>References</h1></section><section id="published-references" class="slide level3">
+<h3>Published References</h3>
+<ul>
+<li>Box &amp; Jenkins. (2015). <em>Time Series Analysis</em>. John Wiley &amp; Sons. (esp Ch 1-4)</li>
+<li>Pal. (2017). <em>Practical Time Series Analysis</em>. Packt Publishing Ltd. (esp Ch. 1-4)</li>
+<li>Downey, A. (2015). <em>Think Stats (2nd Edition)</em>. O’Reilly Media, Inc. (esp Ch 12)</li>
+<li>Velicer. (2012). <em>Time series analysis for psychological research</em>. Handbook of Psychology, Second Edition. (Thorough introduction to ts for social scientists)</li>
+<li>Aigner (2011). <em>Visualization of Time-Oriented Data</em>. Springer Science &amp; Business Media.</li>
+</ul>
+</section><section class="slide level2">
+
+<h3 id="online-resources">Online Resources</h3>
+<ul>
+<li>https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/</li>
+</ul>
+</section></section>
+<section><section id="appendix" class="title-slide slide level1"><h1>APPENDIX</h1></section><section class="slide level2">
+
+<h3 id="units-of-time">Units of Time</h3>
+<ul>
+<li>a particular interval of time</li>
+<li>a standard way of measuring and expression of duration</li>
+</ul>
+</section><section class="slide level2">
+
+<p><img data-src="images/201907091144.14.png" style="width:50.0%" /></p>
+<p>Division of Time Units</p>
+</section><section class="slide level2">
+
+<h3 id="what-is-time-according-to-philosophy-and-science-and-why-it-matters">What is Time (According to Philosophy and Science)? And why it matters?</h3>
+</section><section class="slide level2">
+
+<p>Find me online at www.markwk.com!</p>
+<!-- tags: #TimeSeries #DataScience #DataAnalysis #QuantifiedSelf #DraftWorking #Slides #speech -->
+</section></section>
+    </div>
+  </div>
+
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
