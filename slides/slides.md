@@ -535,7 +535,7 @@ Based on how many time steps they are separated by, the ACF plot displays how co
 
 ### Partial Autocorrelation Function (PACF)
 
-- shows youu the relationship between an observation in a time series with observations at prior time steps but, unlike ACF, with the relationships of intervening observations removed.
+- shows you the relationship between an observation in a time series with observations at prior time steps but, unlike ACF, with the relationships of intervening observations removed.
 
 ------
 
@@ -884,10 +884,6 @@ Why TS Matters, Next Steps and Future Research
 ![](images/201907091144.14.png){ width=50% }
 
 Division of Time Units
-
----
-
-### What is Time (According to Philosophy and Science)? And why it matters?
 
 ---
 
