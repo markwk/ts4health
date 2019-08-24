@@ -1,7 +1,7 @@
 ---
 author: Mark Koester
 title: A Self Across Time
-date: PYCON MALAYSIA, August 24, 2019
+date: PYCON MALAYSIA, August 25, 2019
 ---
 
 ## A Self Across Time <br/> Time Series Data Analysis<br/> with Python 
@@ -28,7 +28,7 @@ github.com/markwk/ts4health
 In short, a time series is a sequence of measurements or observations that varies in time. We define this in more detail but this is a good starting point and classic definition. 
 :::
 
------
+-------
 
 ## Time Series Data Analysis
 
@@ -69,6 +69,34 @@ Most of the related discussions on this are from medical research using what are
 
 With the rise of quantified self and various self-tracking technologies, we see similar interest in trying to understand and model within-individual (or intra-individual) variations using time series data. This might be personal data like fitness, mood, energy level, biomarker data like blood tests or even productivity and creativity. 
 :::
+
+-----
+
+### Quantified Self (QS)
+
+> measuring or documenting something about your self to gain meaning or make improvements
+
+<br/>
+
+<small>Related: Self-tracking, Biohacking, Data-driven life...</small>
+
+::: notes
+- 2007: Quantified Self is neulogism created by Gary Wolf and Kevin Kelly, two writers at Wired Magazine.  
+- 2008: Wolf and Kelly founded the company Quantified Self with the aim “to help people get meaning out of their personal data” 
+- Movement 
+
+#### Definitions of QS: 
+- “Quantified Self (QS) is an emerging area of technology that allows consumers to use a variety of digital tools to collect data and learn about their behaviors and habits of everyday life.” (Rocket Fuel Survey, 2014)
+- "The Quantified Self (QS) refers to a movement in which its participants track the biological, physical, behavioural, and/or environmental aspects of their everyday lives" (Eiben, 2015)
+:::
+
+----
+
+![](https://github.com/markwk/qs_mind_map/raw/master/qs-mind-map-full.png){width=90%}
+
+<small>Source: https://github.com/markwk/qs_mind_map</small>
+
+----
 
 ## Our Question:
 
@@ -132,6 +160,13 @@ Time Series Data Analysis <br /> with Python
 
 ----
 
+## Talk Objectives
+
+1. a conceptual understanding of time series analysis
+2. starter code for visualizing, testing and modeling for time series effects
+
+----
+
 ## Talk Outline
 
 - Time and Temporal Structures of Time Series Data
@@ -160,6 +195,12 @@ Focus will be on univariate, linear, discrete time series
 
 ### What is Time? 
 
+![](https://i.giphy.com/media/9u514UZd57mRhnBCEk/source.gif){width=150%}
+
+----
+
+### What is Time? 
+
 > What, then, is time?
 > If no one asks me, I know what it is.
 > If I wish to explain it to him who asks, I do not know. 
@@ -170,12 +211,19 @@ Focus will be on univariate, linear, discrete time series
 
 Time has a pecular quality such that we think we intuitive know and understand it. But once we are asked, as Saint Augustine asked 1600 years ago, it seems rather hard to explain what we mean. In fact, some of the difficulty with defining time comes with the different perspectives we might take on the question itself. The nature of time has been a long-standing question for humans throughout history. Various philosophers, thinkers, scientists, physists and artists have all weighed in, often using their conceptual domain as the starting point. 
 
-Interestingly, while we often think of time as an innate and universal concept, when you look at history, literature and religion, you notice that our modern sense of time is a rather modern one. In fact, many earlier cultures like the Mayans did not view time as linear, as we now do, but viewed it as cyclical. According to Whitrow in various books on time, key scientific figures like Kant and Descare led to the origin of the idea of time as we know it now. Ref: [[201907081519]]
+Interestingly, while we often think of time as an innate and universal concept, when you look at history, literature and religion, you notice that our modern sense of time is a rather modern one. In fact, many earlier cultures like the Mayans did not view time as linear, as we now do, but viewed it as cyclical. According to Whitrow in various books on time, key scientific figures like Kant and Descare led to the origin of the idea of time as we know it now. 
 
-History and Evolution of Measuring Time..................[[201904131528]]
+TODO: History and Evolution of Measuring Time
+:::
 
-Much of philosophy and the history of philosophy can be thought of in terms questions regarding what is timeless and what is not. Metaphysics would be the central domain in which these questions arised, but in fact, question of what is timeless seeps into nearly all thinkers. Plato, for example, looked to the realm of the Forms to define many of his fundamental concepts. Numerous other philosophers, like Kant, depended on a timeless, immortal realm used to define ethics and reason. Hegal may have added a dynamic quality but the dialetical process transpired largely in the timeless realm of thought and outside of the empirical. Even the question of time ironically becomes whether it's an entity and debated on the terms of metaphysics, including whether it's real or not or just a psychological phenomenon. In short, the timeless haunts even the timed. ref: [[201908041458_timeless_things_philosophy]]
+-----
 
+### Timeless and the "Timed"
+
+> - **Much of philosophy and the history of philosophy can be thought of in terms of questions regarding what is timeless and what is not.**
+
+::: notes
+**Much of philosophy and the history of philosophy can be thought of in terms questions regarding what is timeless and what is not.** Metaphysics would be the central domain in which these questions arised, but in fact, question of what is timeless seeps into nearly all thinkers. Plato, for example, looked to the realm of the Forms to define many of his fundamental concepts. Numerous other philosophers, like Kant, depended on a timeless, immortal realm used to define ethics and reason. Hegal may have added a dynamic quality but the dialetical process transpired largely in the timeless realm of thought and outside of the empirical. Even the question of time ironically becomes whether it's an entity and debated on the terms of metaphysics, including whether it's real or not or just a psychological phenomenon. In short, the timeless haunts even the timed. 
 ::::
 
 ------
@@ -202,23 +250,24 @@ Regardless of the philosophical quandries and the historical conceptions, two de
 > - How do we link "models of time to people's basic experiences"? (Frank, 1998). 
 
 ::: notes
-
-Modeling and visualizing time and the time domain presents a number of considerations, including those of actual experience, design, metaphors, and how we link "models of time to people's basic experiences" (Frank, 1998). 
-
-[[201907091310_modeling_time_domain]]
-
+Modeling and visualizing time and the time domain presents a number of considerations, including those of actual experience, design, metaphors, and how we link "models of time to people's basic experiences" (Frank, 1998). We also shouldn't forget that while we might think of time as a naturlistic object, there is long cultural history with different views on what is time and our current ideas on time evolved from how we measure time and sciences thoughts on time. 
 :::
 
 -----
 
 ### Good News...
 
-> - Fortunately, we don't need to deal with these general time problems as such, because...
-> - ...we only need to deal with the <u>time challenges in our data</u>!
+![](https://media.giphy.com/media/Rgyb0e4qQHK6I/source.gif){width=120%}
 
 -----
 
-### Data Science Challenges with Time Series:
+### Good News...
+
+Fortunately, we don't need to deal with these general time problems as such, because we only need to deal with the <u>time challenges in our data</u>!
+
+-----
+
+### Data Science / ML Challenges with Time Series:
 
 > - How to understand the time component in a data set? 
 > - How to isolate out time... 
@@ -259,6 +308,12 @@ What we are trying to do is isolate out the various aspect of the time index.
 
 ### Time (Index) Can Create Non-Stationary Data
 
+::: notes
+The problem with Non-Stationary Data is that it can be challenging to model due to mixing of effects of time and other variables. Let's look at this visually some. 
+:::
+
+-----
+
 Examples of Stationary vs. Non-Stationary
 
 ----
@@ -292,7 +347,6 @@ Examples of Stationary vs. Non-Stationary
 - <u>unexpected variations</u> (noise, randomness)
 
 ::: notes
-
 Time Series Data has several interesting internal structure that require special techniques (and often mathematical treatment) for its analysis. These internal structures include...
 
 Most time series data displays one or several of these structures. 
@@ -304,7 +358,7 @@ Most time series data displays one or several of these structures.
 
 (or stationary time series or stationary process)
 
-- Stationarity means that the statistical properties of the process do not change over time
+- Stationarity means that the <u>statistical properties</u> of the process do not change over time.
 
 ::: notes
 
@@ -312,9 +366,22 @@ Most time series data displays one or several of these structures.
 
 -----
 
+### Why is Stationary Data Important?
+
+> - Generating stationary data is important in order to understand, model, and forecast time series data. 
+> - In healthcare and biology, we need to understand if an effect is part of a trend or caused by an intervention (or other factors).   
+
+::: notes
+The problem with Non-Stationary Data is that it can challenging to model due to mixing of effects of time and other variables. 
+
+The main idea is that we come up with a model that makes our data regular and then once the data is regular we can use linear regression to make forecasts and see correlations outside of simply occurring along with general trends or seasonality. Practically what this means is we come up with a way to normalize the data BEFORE we model and predict. Then after during our modeling and forecasting we can then reapply the time index model to get data back into real numbers that still follow with the time index. So it's like this 1. check if data has a temporal pattern, 2. time series model and transform the data so that temporal pattern is neutralized, 3. run actual analysis and additional modeling, 4. then apply back ts model and transformation so data is back to previous patterns. 
+:::
+
+-----
+
 ## Stationarizing Our TS Data
 
-Generating stationary data is important in order to understand, model, and forecast time series data. 
+the transformation process of decomposing and detrending ts data so non-stationary becomes stationary. 
 
 ::: notes
 Generating stationary data is important because by taking out trends, seasonal and cyclical components, we'd only be left with irregular fluctations which cannot be modeling using just the time series as an explanatory variabe. So when we do forecasting the irregularity is assumed to be **independent and identically distributed (iid)** observations and modeled by linear regression on the variables other than the time index 
@@ -353,7 +420,7 @@ Our Focus: **Within-Individual Variablity**
 
 ::: notes
 
-While obviously a larger data set would be better, since our goal was to understand **within-individual variablity**, a sample set of a few individuals was enough for our current investigative purposes. 
+While obviously a larger data set would be better, since our goal was to understand **within-individual variablity**, a sample set of a few individuals was enough for our current investigative purposes. It allowed us to look at differences between individuals and compare the modeling and other tests. 
 
 :::
 
@@ -362,8 +429,11 @@ While obviously a larger data set would be better, since our goal was to underst
 ### Practical Questions
 
 - Are there and what are the time patterns for sleep and activity levels? 
-- Can we model and forecast based on these variables? 
-- Does sleep correlate or affect activity level? Or vis-versa?
+- Can we model and forecast these variables? 
+
+<br/>
+
+<small>FUTURE: Does sleep correlate or affect activity level? Or vis-versa?</small>
 
 ---
 
@@ -496,6 +566,12 @@ for Detecting Temporal Effects
 
 - are used check for autocorrelation and if there are other time index effects.
 - Examples: Autocorrelation Function (ACF), Partial Autocorrelation Function (PACF), Dickey-Fuller Test
+
+::: notes
+Autocorrelation is generic form of serial correlation where variable or data is correlated to the time series index and displays some kind of lag. 
+
+Autocorrelation reflects the degree of linear dependency between the time series at index t and the time series at indices t-h or t+h.
+:::
 
 -----
 
@@ -789,11 +865,11 @@ plt.plot(results_AR.fittedvalues, color='red')
 
 ----
 
-![](images/201908181134.39.png)
+![](images/201908250148.12.png)
 
 -----
 
-![](images/201908181134.49.png)
+![](images/201908250144.56.png)
 
 -----
 
@@ -830,10 +906,157 @@ print(model.summary())
 
 ![](images/201908181140.18.png){width=60%}
 
-# Time Series </br /> Data Analysis
+-----
+
+### Auto_Arima Example Results:
+
+![](images/201908250149.10.png)
+
+----
+
+### Prophet (from Facebook)
+
+> Prophet is a procedure for forecasting time series data based on an additive model where non-linear trends are fit with yearly, weekly, and daily seasonality, plus holiday effects. It works best with time series that have strong seasonal effects and several seasons of historical data. Prophet is robust to missing data and shifts in the trend, and typically handles outliers well.
+
+----
+
+### Prophet Usage 101
+
+```python
+# pip install fbprophet
+
+# convert to format for prophet
+df.columns = ["ds", "y"]
+
+# create and fit prophet model
+m = Prophet()
+m.fit(df)
+```
+
+::: notes
+Usage is based on and quite similar to other sci-kit learn models. 
+:::
+
+----
+
+### Prophet Usage 101
+
+```python
+# create empty future df
+future = m.make_future_dataframe(periods=365)
+# predict
+forecast = m.predict(future)
+# plot forecast
+fig1 = m.plot(forecast)
+# plot componets
+fig2 = m.plot_components(forecast)
+```
+
+------
+
+### Prophet Results
+
+![](images/201908250032.35.png)
+
+Plotting Predictions
+
+------
+
+### Prophet Results
+
+![](images/201908250032.41.png)
+
+Components Breakdown
+
+
+# Time Series Data Analysis
 
 Applied to Health and Self
 
+----
+
+### Data Visualization
+
+- Not obvious if there are patterns or not but there are trends and up's and downs.
+- Some seasonality effects (esp weekly for some individuals).
+- Different people sleep and move in different patterns (compared b/t self and b/t others)
+
+------
+
+### Statistical Tests for Stationality
+
+- Data appears to be largely stationary but varies from person to person. 
+- Some people have more autocollection (i.e. lag than others)
+
+<small>CODE: Tests_and_Techniques_Health_and_Self_Time_Series.ipynb</small>
+
+-----
+
+### ARIMA Modeling for Health Data
+
+Can we model the data with ARIMA? 
+
+<br/>
+
+<small>CODE: TS_Statistical_Modeling_Health_and_Self_Time_Series.ipynb</small>
+
+----
+
+### ARIMA Modeling for Health Data
+
+![](images/201908250055.44.png)
+
+----
+
+### ARIMA Modeling for Health Data
+
+:![](images/201908250055.26.png)
+
+-----
+
+### Problems with 
+### ARIMA Modeling for Health Data
+
+- Overly sensitive to certain outliers and trends
+- Best model appears to be no model? 
+
+----
+
+### Prophet for Health Data
+
+Can we model health data better with Prophet? 
+
+<br/>
+
+<small>Code: Health_TS_with_Prophet.ipynb</small>
+
+----
+
+### Prophet for Health Data, Ex 1
+
+![](images/201908250021.14.png)
+
+----
+
+### Prophet for Health Data, Ex 2
+
+![](images/201908250025.34.png)
+
+----
+
+### Prophet for Health Data, Ex 3
+
+![](images/201908250025.58.png)
+
+-----
+
+### Pro's and Con's 
+### Prophet for Health Data
+
+- Better at dealing with outliers
+- Weekly breakdown components is an interesting pattern insight
+- Results appear to largely be flat like better ARIMA models too
+- A bit of a black box model?
 
 # Conclusions
 
@@ -841,7 +1064,56 @@ Why TS Matters, Next Steps and Future Research
 
 -----
 
+### Key Takeways (TS)
+
+> - Temporal effects matter because unless we check for underlying trends we can't be sure if health changes are just a temporal pattern OR caused by targetted change (like lifestyle or treatment). 
+> - Reliable statistical tests and visualizations exist to check if data is stationary.
+
+::: notes
+What we looked at: 
+- Time and Temporal Structures of Time Series Data
+- Time Series Visualization, EDA, and Processing
+- Tests and Techniques for Time Series Data
+- Modeling Time Series Data
+:::
+
 -----
+
+### Key Takeways (Health and Self TS)
+
+> - Health data can be powerful but health patterns differ from person to person and within an individual too (and our models need to account for these). 
+> - Unfortunately numerous challanges remain for data-driven health care for doctors...
+> - ...as well as for quantified self and biohackers and little open source code exists for health and personal data analysis and modeling. 
+
+-----
+
+### Next Steps and Future Research
+
+::: notes
+Currently looking to expand these techniques to be more reliable for various health and self data sets. Exploring ways to incorporate scientific biological patterns and models as well as apply health reference ranges and risk factors too. We are working on combining biometric data with other health tracking and test results data, like glucose monitoring and standard blood tests. Obviously we want to build data-driven health products one day too. 
+:::
+
+----
+
+###  Health Data World
+
+> - We live in a world of devices, tracking tech and data.
+> - It's time to build a world of healthier selves with it. 
+
+# Thanks 
+
+<br>
+
+Slides and Code: github.com/markwk/ts4health</p>
+
+<br>
+
+www.markwk.com <br/>
+datadrivenyou.com<br/>
+
+# 
+
+> "In God we trust, all others bring data." (W. Edwards Deming)
 
 # References
 
@@ -870,23 +1142,8 @@ Why TS Matters, Next Steps and Future Research
 - [Playing with time series data in python](https://towardsdatascience.com/playing-with-time-series-data-in-python-959e2485bff8) - focuses on energy trends data and more deep learning methods
 - [Working with Time Series from Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/03.11-working-with-time-series.html) 
 
-# APPENDIX
 
----
 
-### Units of Time
-
-- a particular interval of time
-- a standard way of measuring and expression of duration 
-
-------
-
-![](images/201907091144.14.png){ width=50% }
-
-Division of Time Units
-
----
+# 
 
 Find me online at www.markwk.com!
-
-<!-- tags: #TimeSeries #DataScience #DataAnalysis #QuantifiedSelf #DraftWorking #Slides #speech -->
